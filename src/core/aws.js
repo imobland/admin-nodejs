@@ -1,10 +1,18 @@
 const AWS = require("aws-sdk");
-const { region, userID, apiVersion } = use("config/aws");
+const { arn, apiVersion, region } = use("config/aws");
 
 AWS.config.update({ region });
 
-function getARN(topic) {
-  return `arn:aws:sns:${region}:${userID}:${topic}`;
+function getDefaultParams(message, attrs) {
+  const MessageAttributes = {};
+  for (let key in attrs) {
+    MessageAttributes[key] = { DataType: "String", StringValue: attrs[key] };
+  }
+  return {
+    TopicArn: arn,
+    Message: JSON.stringify(message),
+    MessageAttributes,
+  };
 }
 
 function sns() {
@@ -13,6 +21,6 @@ function sns() {
 
 module.exports = {
   AWS,
-  getARN,
+  getDefaultParams,
   sns,
 };

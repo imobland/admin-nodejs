@@ -1,6 +1,11 @@
 <?php
 require("./nodejs.php");
 
-$response = nodejs::run("webhook/emit", "integration-create", ["name"=>"TESTE"]);
+$message = ["name"=>"TESTE"];
+
+$response = nodejs::run("webhook/emit", $message, [
+  "event" => "property-delete",
+  "tags"  => "published"
+]);
 
 echo json_encode($response, JSON_PRETTY_PRINT);

@@ -1,17 +1,13 @@
-const { sns, getARN } = use("core/aws");
+const { sns, getDefaultParams } = use("core/aws");
 
 module.exports = {
-  handle(topic, message) {
-    const Message = {
-      message,
-      event: "create-integration",
-      client: { ref: "devsite1" },
-      partner: { ref: "olx" },
-    };
-    const data = {
-      TopicArn: getARN(topic),
-      Message: JSON.stringify(Message),
-    };
+  //
+  handle(message, attributes) {
+    //
+    const env = process.env.NODE_ENV ? process.env.NODE_ENV : "dev";
+
+    const data = getDefaultParams(message, { ...attributes, env });
+
     sns()
       .publish(data)
       .promise()
