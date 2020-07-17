@@ -1,15 +1,8 @@
 {
-  "scripts": {
-    "notify": "node index.js"
-  },
   "dependencies": {
     "aws-sdk": "^2.714.2",
     "dotenv": "^8.2.0",
     "js-base64": "^3.2.3",
-    "lodash": "^4.17.19",
-    "postinstall": "^0.7.0"
-  },
-  "_moduleAliases": {
-    "@lib": "src/lib"
+    "lodash": "^4.17.19"
   }
 }
