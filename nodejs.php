@@ -2,18 +2,20 @@
 //
 class nodejs
 {
+    public static $node = "node";
+
     public static function run()
     {
-        $file = "index";
-        $node = 'node';
-        $path = realpath('.');
-      
+        $node = self::$node;
+
         $args = base64_encode(json_encode(func_get_args()));
       
-        $command = "cd $path && $node src/{$file}.js --base64 $args 2>&1";
+        $command = "$node src/index.js --base64 $args 2>&1";
         
-        exec($command, $retval);
+        exec($command, $lines);
 
-        return $retval;
+        return $lines;
     }
 }
+
+nodejs::$node = "node";

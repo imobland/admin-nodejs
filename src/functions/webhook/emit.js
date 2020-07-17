@@ -2,7 +2,6 @@ const { sns, getARN } = use("core/aws");
 
 module.exports = {
   handle(topic, message) {
-    //
     const Message = {
       message,
       event: "create-integration",

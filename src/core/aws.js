@@ -1,19 +1,18 @@
 const AWS = require("aws-sdk");
-const { apiVersion } = use("config/aws");
+const { region, userID, apiVersion } = use("config/aws");
 
-AWS.config.update({ region: process.env.AWS_DEFAULT_REGION });
-
-const region = process.env.AWS_DEFAULT_REGION;
-const userid = process.env.AWS_USER_ID;
+AWS.config.update({ region });
 
 function getARN(topic) {
-  return `arn:aws:sns:${region}:${userid}:${topic}`;
+  return `arn:aws:sns:${region}:${userID}:${topic}`;
+}
+
+function sns() {
+  return new AWS.SNS({ apiVersion });
 }
 
 module.exports = {
   AWS,
   getARN,
-  sns() {
-    return new AWS.SNS({ apiVersion });
-  },
+  sns,
 };
