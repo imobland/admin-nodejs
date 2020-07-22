@@ -1,5 +1,9 @@
 {
+  "scripts": {
+    "test": "php test.php"
+  },
   "dependencies": {
+    "admin-core": "github:imobland/admin-core",
     "aws-sdk": "^2.714.2",
     "dotenv": "^8.2.0",
     "js-base64": "^3.2.3",

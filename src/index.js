@@ -1,16 +1,22 @@
 require("./lib/constants");
 require("dotenv").config();
 
-const { getParams } = use("lib/params");
+async function app() {
+  //
+  const { getParams } = use("lib/params");
 
-const params = getParams();
+  const params = getParams();
 
-const route = params.shift();
+  const route = params.shift();
 
-const { handle } = use(`functions/${route}`);
+  const { handle } = use(`functions/${route}`);
 
-handle(...params);
+  //
+  await handle(...params);
 
-// console.log(path);
+  if (global.connection) {
+    connection.close();
+  }
+}
 
-// console.log(route);
+app();
