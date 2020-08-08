@@ -1,4 +1,3 @@
-// const database = use("core/database");
 const { Models, DB } = require("admin-core");
 
 global.connection = DB.connect({
@@ -9,17 +8,24 @@ global.connection = DB.connect({
   logging: false,
 });
 
+const { DynamoDB } = use("core/aws");
+
 module.exports = {
   //
   async handle(params) {
     //
     const { Property } = Models;
 
-    const property = await Property.findOne();
+    const property = await Property.findOne({
+      where: { property_id: 52201 },
+    });
     
-    console.log(property.toJSON());
-
-    console.log(JSON.stringify({ params }));
+    console.log(
+      JSON.stringify({
+        raw,
+        // property: property.toJSON(),
+      })
+    );
 
     return true;
   },

@@ -34,8 +34,14 @@ function sns() {
   return new AWS.SNS({ apiVersion });
 }
 
+function DynamoDB() {
+  var docClient = new AWS.DynamoDB.DocumentClient();
+  return docClient;
+}
+
 module.exports = {
   AWS,
   getDefaultParams,
   sns,
+  DynamoDB
 };
